@@ -2,7 +2,7 @@ import { gql } from "apollo-server-micro";
 
 export const typeDefs = gql`
   type Note {
-    id: ID!
+    id: Int!
     content: String!
   }
   input AddNoteInput {
@@ -12,6 +12,6 @@ export const typeDefs = gql`
     notes: [Note!]!
   }
   type Mutation {
-    addNote(input: AddNoteInput): Note
+    addNote(input: AddNoteInput!): Note
   }
 `;

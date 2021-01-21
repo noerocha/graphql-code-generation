@@ -1,18 +1,18 @@
-import { IResolvers } from "apollo-server-micro";
-import Notes, { Note, AddNoteInput } from "./notes";
+import { Resolvers } from "../generated/graphql-backend";
+import Notes from "./notes";
 
 interface ApolloServerContext {
   notes: Notes;
 }
 
-export const resolvers: IResolvers<any, ApolloServerContext> = {
+export const resolvers: Resolvers<ApolloServerContext> = {
   Query: {
-    notes: (parent, args, context): Note[] => {
+    notes: (parent, args, context) => {
       return context.notes.getAllNotes();
     },
   },
   Mutation: {
-    addNote: (parent, args: { input: AddNoteInput }, context): Note | null => {
+    addNote: (parent, args, context) => {
       const newNote = context.notes.addNote(args.input);
       return newNote;
     },
